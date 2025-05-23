@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Shiro API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+    <link rel="icon" href="./profile.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111827 !important;
+            color: #edf2f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .section-header {
+            background-color: #111827 !important;
+        }
+
+         .bg-gray-800 {
+            background-color: #131C2F !important;
+        }
+
+        header {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          background: rgba(17, 24, 39, 0.6);
+          padding: 1.5rem 2rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(16px);
+          transition: transform 0.2s, box-shadow 0.2s;
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        header:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        header i {
+            color: #3a86ff;
+            font-size: 2.5rem;
+            margin-right: 0.75rem;
+            transition: transform 0.3s;
+        }
+
+        header:hover i {
+            transform: scale(1.05);
+        }
+
+        header span {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #edf2f7;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        main {
+            padding: 12rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero {
+            position: relative;
+            margin-bottom: 12rem;
+            max-width: 800px;
+            width: 100%;
+            padding: 4rem;
+            border-radius: 32px;
+            background-color: #111827 !important;
+            backdrop-filter: blur(24px);
+            transition: all 0.3s;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #edf2f7;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #a0aec0;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-button {
+            background: blue;
+            color: #edf2f7;
+            padding: 16px 40px;
+            border-radius: 32px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .features {
+            max-width: 800px;
+            width: 100%;
+            padding: 4rem 0;
+            background-color: #111827 !important;
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            margin: 8rem auto;
+            padding: 3rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .features h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #edf2f7;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .features p {
+            color: #a0aec0;
+            font-size: 1.25rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background-color: #111827 !important;
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            color: #3a86ff;
+            transition: transform 0.3s, color 0.3s;
+            animation: icon-float 1.5s infinite;
+        }
+
+        @keyframes icon-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.05);
+            color: #00f5d4;
+        }
+
+        .feature-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #edf2f7;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #111827 !important;
+            padding: 3rem 0;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            margin: 6rem auto 4rem;
+            max-width: 800px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        footer a {
+            color: #a0aec0;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #00f5d4;
+            transform: scale(1.1) rotate(15deg);
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .feature-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .social-links a i {
+            font-size: 24px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="flex items-center">
+            <i class="fas fa-bolt"></i>
+            <span>Shiro API</span>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <h1>Build Smarter.<br/>Scale Faster.</h1>
+            <p class="sub-text">Empower your applications with Shiro's cutting-edge APIs designed to accelerate development and ensure seamless scalability.</p>
+            <a href="/dashboard" class="hero-button">Start Free</a>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Premium API Features</h2>
+            <p>Shiro API offers a suite of premium features designed to accelerate your development process and ensure your application scales effortlessly. Whether you're building a startup or scaling an enterprise, our APIs are built to grow with you.</p>
+            <div class="feature-cards space-y-6">
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <div>
+                        <h3 class="feature-title">Lightning Speed</h3>
+                        <p class="feature-desc">With a global CDN network, Shiro API delivers response times as fast as 100ms worldwide. Backed by a 99.9% uptime guarantee, your users will experience consistent performance no matter where they are.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-check-circle feature-icon"></i>
+                    <div>
+                        <h3 class="feature-title">Easy to Use</h3>
+                        <p class="feature-desc">Our intuitive documentation and pre-built SDKs for JavaScript, Python, and Java make integration a breeze. Start building in minutes with our step-by-step guides and 24/7 developer support.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <div>
+                        <h3 class="feature-title">Smart Scaling</h3>
+                        <p class="feature-desc">Automatic scaling adjusts to your traffic spikes, ensuring your application never slows down. Scale effortlessly with our flexible plans.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-shiro" class="features">
+            <h2>Why Choose Shiro API?</h2>
+            <div class="feature-cards space-y-6">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <div>
+                        <h3 class="feature-title">Enterprise-Grade Security</h3>
+                        <p class="feature-desc">End-to-end encryption, SOC 2 compliance, and 24/7 threat monitoring keep your data safe. Built with security at every layer.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-comments feature-icon"></i>
+                    <div>
+                        <h3 class="feature-title">Developer-Friendly Support</h3>
+                        <p class="feature-desc">Get instant help via our live chat, comprehensive documentation, and a thriving community forum. We're here to help you succeed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl mt-8">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="flex flex-col items-center space-y-2">
+<p class="text-gray-400 text-sm">© 2025 Shiro. All rights reserved. built with love by developers, for developers.</p>
+</div>
+<div class="social-links">
+<a href="https://github.com/shirodixs" target="_blank" rel="noopener noreferrer">
+<i class="fab fa-github"></i>
+</a>
+ <a href="https://wa.me/6285226344606" target="_blank" rel="noopener noreferrer">
+<i class="fab fa-whatsapp"></i>
+</a>
+</div>
+</div>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiro API</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+font-family: 'Poppins', sans-serif;
+background-color: #111827 !important;
+color: #edf2f7;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+.endpoint-card {
+background-color: #111827 !important;
+border: 1px solid #111827;
+}
+
+.section-header {
+background-color: #111827 !important;
+}
+
+.bg-gray-800 {
+background-color: #131C2F !important;
+}
+
+.copy-btn, .try-btn {
+background-color: #4d8aff !important;
+}
+
+.try-btn:hover {
+background-color: #1A73E8 !important;
+}
+
+.copy-btn:hover {
+background-color: #2C5F7D !important;
+}
+
+.text-white {
+color: #ffffffff !important;
+}
+
+.text-blue-400 {
+color: #0077FF !important;
+}
+
+.shadow-lg {
+box-shadow: 0 10px 15px -3px rgba(10, 26, 47, 0.3) !important;
+}
+
+.rounded-full {
+box-shadow: 0 0 0 2px rgba(26, 55, 77, 0.5) !important;
+}
+
+.endpoint-card:hover {
+transform: translateY(-2px);
+box-shadow: 0 15px 20px -5px rgba(10, 26, 47, 0.3);
+transition: all 0.2s ease-in-out;
+}
+.section-header {
+background: linear-gradient(135deg, rgba(0, 123, 255, 0.2), rgba(102, 16, 242, 0.2));
+border-radius: 0.75rem 0.75rem 0 0;
+}
+
+@media (max-width: 768px) {
+.endpoint-card {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.copy-btn, .try-btn {
+margin: 0.5rem 0;
+}
+}
+
+.social-links a i {
+font-size: 24px;
+}
+
+.social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+.social-links a {
+margin: 0;
+}
+
+#loader {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(25, 28, 44, 0.9);
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+z-index: 9999;
+backdrop-filter: blur(8px);
+}
+
+.loader {
+border: 4px solid #2d3748;
+border-radius: 50%;
+border-top: 4px solid #3a86ff;
+width: 50px;
+height: 50px;
+animation: spin 1s linear infinite;
+margin-bottom: 1rem;
+}
+
+.loader-text {
+color: #edf2f7;
+font-size: 1.2rem;
+letter-spacing: 0.1em;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+header {
+position: fixed;
+top: 0;
+width: 100%;
+background: rgba(17, 24, 39, 0.6);
+padding: 1.5rem 2rem;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(16px);
+transition: transform 0.2s, box-shadow 0.2s;
+z-index: 100;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+header:hover {
+transform: translateY(-3px);
+box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+header i {
+color: #3a86ff;
+font-size: 2.5rem;
+margin-right: 0.75rem;
+transition: transform 0.3s;
+}
+
+header:hover i {
+transform: scale(1.05);
+}
+
+header span {
+font-size: 2rem;
+font-weight: 800;
+color: #edf2f7;
+text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+</style>
+</head>
+<body class="bg-gray-900 text-white">
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+<div id="loader">
+<div class="loader"></div>
+</div>
+
+<header class="py-4">
+<div class="flex items-center">
+<img src="./profile.png" 
+ alt="Shiro API" 
+ class="w-16 h-16 rounded-full mr-4 shadow-lg">
+<div>
+<h1 class="text-3xl font-bold">Shiro API</h1>
+<p class="text-lg text-gray-400">Documentation v1.0</p>
+</div>
+</div>
+</header>
+
+<!-- Hero Section -->
+<div class="text-center mb-12 pt-20 relative z-20">
+<h2 class="text-5xl font-extrabold mb-4 text-blue-400">API Documentation</h2>
+<p class="text-gray-400 max-w-md mx-auto">Explore our comprehensive API endpoints with interactive examples and detailed guides.</p>
+</div>
+
+<!-- API Endpoints -->
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-semibold text-blue-400">Orkut Endpoint</h3>
+<span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-bold">2 Endpoint</span>
+</div>
+
+<div class="space-y-4">
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/orkut/createpayment?amount=&codeqr=">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Create payment</h4>
+</div>
+<p class="text-gray-400 text-sm">Create a payment transaction using orderkuota for seamless and automated processing.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/orkut/cekstatus?merchant=&keyorkut=">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Cek status</h4>
+</div>
+<p class="text-gray-400 text-sm">Check the status of your orderkuota transaction.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- AI Endpoints -->
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-semibold text-blue-400">AI Endpoint</h3>
+<span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-bold">25 Endpoint</span>
+</div>
+
+<div class="space-y-4">
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/txt2img?prompt=gadis%20cantik">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Text to image</h4>
+</div>
+<p class="text-gray-400 text-sm">Generate high-quality images from text using text to image, transforming your ideas into stunning visuals effortlessly.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/text2img?prompt=gadis%20cantik">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Text to image v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Generate high-quality images from text using text to image v2, transforming your ideas into stunning visuals effortlessly.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/aoyo?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Aoyo AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Aoyo AI, your intelligent assistant for answering questions and helping with tasks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/blackbox?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Blackbox AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Blackbox AI, an intelligent assistant designed to help with coding, answer technical questions, and enhance your development workflow.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/gpt3?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">GPT 3.5</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with an AI powered by GPT-3.5 to assist you with answers and tasks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/gpt4?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">GPT 4</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with an advanced AI powered by GPT-4 to answer your questions and assist with your tasks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/aiimage?text=gadis%20cantik%20korea%20menggunakan%20hijab">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Image AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Create high-quality, AI-generated images effortlessly with Image AI. Simply input your desired description, and let our advanced technology bring your imagination to life with stunning visuals.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/cloudflareai?prompt=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Cloudflare AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Cloudflare AI, a smart AI assistant designed to provide intelligent responses, assist with tasks, and enhance your conversational experience.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/degreeguru?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Deegree Guru</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Deegree Guru, your expert AI assistant designed to provide valuable insights, guidance, and solutions across various domains.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/qwen?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Qwen 2.5 32B</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Qwen-2.5 32B, an advanced language model designed to provide accurate answers, assist with tasks, and enhance your AI-driven interactions.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/meta?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Llama 3.1</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Meta Llama AI, a powerful language model designed to provide intelligent responses, assist with tasks, and enhance your conversational experience.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/gemma?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Gemma 2.9B</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Gemma AI, an intelligent and responsive assistant designed to provide insightful answers, assist with tasks, and enhance your AI experience.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/flux?prompt=gadis%20korea">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Flux</h4>
+</div>
+<p class="text-gray-400 text-sm">Generate stunning images from text with Flux AI, an advanced AI-powered tool designed to bring your creative ideas to life.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/fluximg?prompt=gadis%20korea">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Flux v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Generate stunning images from text with Flux AI 2, an advanced AI-powered tool designed to bring your creative ideas to life.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/muslimai?message=assalamualaikum">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Muslim AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Muslim AI, your dedicated Islamic assistant designed to provide guidance, answer questions, and support your journey with knowledge and wisdom.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/dopple?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Dopple AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Dopple AI, your intelligent assistant designed to offer smart conversations, answer questions, and assist with various tasks efficiently.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/deepseek?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Deepseek R1</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with DeepSeek R1, an advanced AI assistant designed to provide accurate answers, insightful discussions, and intelligent solutions to your queries.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/gemini?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Gemini 2.0</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Gemini AI, a powerful AI assistant designed to help you with information, creativity, and problem-solving in real time.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/hoshino?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Hoshino AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Hoshino AI, your smart virtual assistant designed to provide insightful answers, assist with tasks, and enhance your AI-driven interactions.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/mistral?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Mistral nemo</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Mistral AI, an advanced language model designed to provide intelligent responses, assist with tasks, and enhance your conversational experience.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/openai?teks=apa%20itu%20javascript&prompt=Kamu%20adalah%20ai%20yang%20jago%20ngoding">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Openai</h4>
+</div>
+<p class="text-gray-400 text-sm">Engage in a conversation with OpenAI, your advanced AI assistant designed to answer questions, generate ideas, and assist with various tasks efficiently.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/luminai?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Luminai</h4>
+</div>
+<p class="text-gray-400 text-sm">Start a conversation with Lumin AI, your intelligent assistant for answering questions, providing insights, and assisting with various tasks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/zetaa?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Zetaa AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Zetaa AI, a powerful AI assistant designed to provide smart responses, assist with tasks, and enhance your conversational experience.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/hertaa?message=apa%20itu%20javascript">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Hertaa AI</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Hertaa AI, your intelligent virtual assistant designed to provide insightful answers, assist with tasks, and enhance your AI-driven interactions.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/ai/yousearch?searchTerm=prabowo">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Yousearch</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with Yousearch AI, an advanced assistant designed to help you find accurate information, answer questions, and enhance your search experience.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Downloader Endpoints -->
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-semibold text-blue-400">Download Endpoint</h3>
+<span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-bold">26 Endpoint</span>
+</div>
+
+<div class="space-y-4">
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/spotifydl?url=https://open.spotify.com/track/0R6KCq5TLJB3gi2ragMrXZ">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Spotify v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Download spotify songs effortlessly with spotify downloader v2, ensuring high-quality audio.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/spotify?url=https://open.spotify.com/track/0R6KCq5TLJB3gi2ragMrXZ">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Spotify</h4>
+</div>
+<p class="text-gray-400 text-sm">Download spotify music and playlists effortlessly in high-quality audio with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/githubdl?url=https://github.com/rynxzyy/Rynn-UI.git">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Github</h4>
+</div>
+<p class="text-gray-400 text-sm">Download files and repositories from github quickly and easily with a reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/fb?url=https://www.facebook.com/watch/?v=1393572814172251">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Facebook</h4>
+</div>
+<p class="text-gray-400 text-sm">Download facebook videos easily in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/twitter?url=https://twitter.com/gofoodindonesia/status/1229369819511709697">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Twitter</h4>
+</div>
+<p class="text-gray-400 text-sm">Download twitter videos effortlessly in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/instagram?url=https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Instagram</h4>
+</div>
+<p class="text-gray-400 text-sm">Download instagram videos, reels, stories, and photos easily in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/ig?url=https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Instagram v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Download instagram videos, reels, and stories effortlessly with instagram downloader v2, ensuring high-quality content.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/igdownload?url=https://www.instagram.com/stories/fifaworldcup/3590992754182422878?utm_source=ig_story_item_share&igsh=Yjc4Zm85bTlycXJ5">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Instagram v3</h4>
+</div>
+<p class="text-gray-400 text-sm">Download instagram videos, reels, and stories effortlessly with instagram downloader v3, ensuring high-quality content.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/threads?url=https://www.threads.net/@ruang_kita._/post/DHN0mvBJlQM?xmt=AQGzJFHMH83e_nG9wv9yGMVgLITuFB54GENoD_-cSlcdOQ">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Threads</h4>
+</div>
+<p class="text-gray-400 text-sm">This downloader supports multithreading, allowing faster and more efficient video and image downloads.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/mediafire?url=https://www.mediafire.com/file/tu8qyjmd4baa2bh/White_Queen_By_Kyami_Silence.zip/file">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Mediafire</h4>
+</div>
+<p class="text-gray-400 text-sm">Download files from mediafire quickly and securely with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/mediafiredl?url=https://www.mediafire.com/file/tu8qyjmd4baa2bh/White_Queen_By_Kyami_Silence.zip/file">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Mediafire v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Download files from mediafire v2 quickly and securely with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/tiktok?url=https://vt.tiktok.com/ZSMWSTed1/">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Tiktok</h4>
+</div>
+<p class="text-gray-400 text-sm">Download tiktok videos and slide photo content easily in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/tiktokdl?url=https://vt.tiktok.com/ZSMWSTed1/&type=video">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Tiktok v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Easily download tiktok videos and slide photo v2 content in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/pinterest?url=https://pin.it/7x6UbAuSd">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Pinterest</h4>
+</div>
+<p class="text-gray-400 text-sm">Download pinterest images and videos effortlessly in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/soundcloud?url=https://soundcloud.com/issabella-marchelina/sisa-rasa-mahalini-official-audio?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Soundcloud</h4>
+</div>
+<p class="text-gray-400 text-sm">Download soundcloud tracks quickly and easily in high-quality audio with a reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/douyin?url=https://v.douyin.com/ikq8axJ/">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Douyin</h4>
+</div>
+<p class="text-gray-400 text-sm">Download douyin videos easily in high quality with a fast and reliable downloader, free from watermarks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/doodstream?url=">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Doodstream</h4>
+</div>
+<p class="text-gray-400 text-sm">Download audio from doodstream quickly and easily with a high-quality, reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/yta?url=https://youtu.be/XS6LfiGHxx4?si=KKOHB_zVmTPRPRTk">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Savetube MP3</h4>
+</div>
+<p class="text-gray-400 text-sm">Download youtube audio easily with savetube in MP3 format.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/ytv?url=https://youtu.be/XS6LfiGHxx4?si=KKOHB_zVmTPRPRTk">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Savetube MP4</h4>
+</div>
+<p class="text-gray-400 text-sm">Download youtube video easily with savetube in MP4 format.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/ytaudio?url=https://youtu.be/XS6LfiGHxx4?si=KKOHB_zVmTPRPRTk">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Youtube Audio</h4>
+</div>
+<p class="text-gray-400 text-sm">Download youtube audio effortlessly in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/ytvideo?url=https://youtu.be/XS6LfiGHxx4?si=KKOHB_zVmTPRPRTk">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Youtube Video</h4>
+</div>
+<p class="text-gray-400 text-sm">Download youtube videos effortlessly in high quality with a fast and reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/ytmp3?url=https://youtu.be/phiVbPK6HmY?si=YojdB_ubYU4ZQaGn">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Youtube MP3</h4>
+</div>
+<p class="text-gray-400 text-sm">Download youtube audio in MP3 format quickly and easily with a high-quality, reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/ytmp4?url=https://youtu.be/phiVbPK6HmY?si=YojdB_ubYU4ZQaGn">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Youtube MP4</h4>
+</div>
+<p class="text-gray-400 text-sm">Download youtube videos in MP4 format quickly and easily with a high-quality, reliable downloader.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/capcut?url=https://www.capcut.com/template-detail/7273798219329441025?template_id=7273798219329441025&share_token=1ea9b68c-aa1b-4fc4-86c2-bf2b9136b6e0&enter_from=template_detail&region=ID&language=in&platform=copy_link&is_copy_link=1">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Capcut</h4>
+</div>
+<p class="text-gray-400 text-sm">Download capcut videos easily with a fast and reliable downloader, ensuring high-quality content with watermarks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/capcutdl?url=https://www.capcut.com/template-detail/7273798219329441025?template_id=7273798219329441025&share_token=1ea9b68c-aa1b-4fc4-86c2-bf2b9136b6e0&enter_from=template_detail&region=ID&language=in&platform=copy_link&is_copy_link=1">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Capcut v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Download capcut videos easily with a fast and reliable downloader, ensuring high-quality content without watermarks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/downloader/gdrive?url=https://drive.google.com/file/d/1thDYWcS5p5FFhzTpTev7RUv0VFnNQyZ4/view?usp=drivesdk">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Google drive</h4>
+</div>
+<p class="text-gray-400 text-sm">Easily download files from google drive with a fast and secure downloader for seamless access to your stored content.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Search Endpoints -->
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-semibold text-blue-400">Search Endpoint</h3>
+<span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-bold">33 Endpoint</span>
+</div>
+
+<div class="space-y-4">
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/apkfree?query=whatsapp">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Apk4free</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for modded apps and premium apks on apk4free quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/gc?query=ramadhan%2025">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Group</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for whatsapp groups across various categories and join communities easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/sticker?query=kwon%20yuli">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Sticker</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for stickers across various categories quickly and easily with a powerful sticker search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/halodoc?query=asma">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Halodoc Article</h4>
+</div>
+<p class="text-gray-400 text-sm">Find reliable health articles on halodoc quickly and easily.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/wikipedia?query=prabowo">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Wikipedia</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for articles and information on wikipedia quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/github?query=bot">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Github</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for repositories, code, and projects on github quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/otakudesu?query=one%20piece">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Otakudesu</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for anime series and episodes on otakudesu quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/cerpen?category=romantis">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Cerpen</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for short stories across various genres quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/android?query=whatsapp">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Android1</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for modded apps and games on android1 quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/bacaresep?url=https://resepkoki.id/resep/resep-ayam-bakar-bumbu-rujak/">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Baca resep</h4>
+</div>
+<p class="text-gray-400 text-sm">Explore and read a variety of delicious food recipes, from quick meals to gourmet dishes.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/webtoons?query=horror">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Webtoons</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for your favorite webtoons, comics, and creators quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/wattpad?query=horror">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Wattpad</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for stories, books, and authors on wattpad quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/cariresep?query=ayam%20bakar">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Cari resep</h4>
+</div>
+<p class="text-gray-400 text-sm">Find delicious food recipes quickly and easily with a powerful recipe search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/apkmirror?query=whatsapp">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Apkmirror</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for apk files and app updates on apkmirror quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/apkcombo?query=whatsapp">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Apkcombo</h4>
+</div>
+<p class="text-gray-400 text-sm">Find apk files and app updates on apkcombo quickly and easily with an advanced search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/komikindo?search=naruto">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Komikindo</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for manga and comics on komikindo quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/spotifysearch?search=sekti">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Spotify v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Find songs, albums, and artists effortlessly with spotify search v2, offering fast and accurate music discovery.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/spotify?search=sekti">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Spotify</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for songs, albums, and artists on spotify quickly and easily with a powerful music search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/dafonts?search=aesthetic">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Dafont</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for fonts on dafont quickly and easily with a powerful font search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/bing?search=prabowo">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Bing</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for information quickly and accurately using bing's powerful search engine.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/playstore?search=whatsapp">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Playstore</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for apps, games, and more on the play store quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/wikimedia?search=prabowo">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Wikimedia</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for images, media, and articles on wikimedia quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/bukalapak?search=baju">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Bukalapak</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for products on bukalapak quickly and easily with a powerful shopping search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/bluearchive">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Blue Archive</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for random blue archive media with an efficient search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/happymod?search=whatsapp">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Happymod</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for modded apps and games on happymod quickly and easily with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/sfile?search=telkomsel">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Sfilemobi</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for files on sfilemobi quickly and easily with an efficient file lookup tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/pinterest?search=JKT48%20Christy">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Pinterest</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for pinterest images, ideas, and inspiration easily with a powerful and efficient search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/youtube?search=phonk">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Youtube</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for youtube videos content quickly with a powerful search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/surah?number=10">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Surah</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for any surah in the qur'an quickly and easily with an advanced lookup tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/jadwalsolat?kota=yogyakarta">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Jadwal sholat</h4>
+</div>
+<p class="text-gray-400 text-sm">Find accurate prayer times for any city worldwide with a reliable search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/liriklagu?search=duka">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Lirik lagu</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for song lyrics directly from google and find accurate, up-to-date lyrics for your favorite tracks.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/gimage?search=nasa">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Google</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for high-quality images on google quickly and easily with an advanced image search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/search/tiktoksearch?search=dodocantropus">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Tiktok</h4>
+</div>
+<p class="text-gray-400 text-sm">Search for tiktok videos, users, and trends quickly with a powerful and efficient search tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Tools Endpoints -->
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl mb-8">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-semibold text-blue-400">Tools Endpoint</h3>
+<span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-bold">18 Endpoint</span>
+</div>
+
+<div class="space-y-4">
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/emojimix?emoji1=😭&emoji2=🥰">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Emoji mix</h4>
+</div>
+<p class="text-gray-400 text-sm">Combine two emojis into a single unique emoji quickly with an easy-to-use tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/imgprompt?image=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Image to prompt</h4>
+</div>
+<p class="text-gray-400 text-sm">Convert your images into AI-ready prompts with ease.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/toanime?image=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Image to anime</h4>
+</div>
+<p class="text-gray-400 text-sm">Transform your images into anime-style artwork effortlessly with an advanced AI tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/imgtosketch?imageUrl=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Image to sketch</h4>
+</div>
+<p class="text-gray-400 text-sm">Convert your images into stunning sketch-style artwork with just one click.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/removebg?url=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Removebg</h4>
+</div>
+<p class="text-gray-400 text-sm">Remove the background from images quickly and easily with an AI-powered background remover tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/removebackground?image=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Removebg v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Quickly and easily remove image backgrounds with the AI-powered background remover v2.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/autogempa">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Gempa</h4>
+</div>
+<p class="text-gray-400 text-sm">Get real-time earthquake information, including location, magnitude, and impact details from reliable sources.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/translate?text=welcome&language=id">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Translate</h4>
+</div>
+<p class="text-gray-400 text-sm">Translate text quickly and accurately between multiple languages with an advanced translation tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/quotesanime">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Quotes Anime</h4>
+</div>
+<p class="text-gray-400 text-sm">Get random anime quotes to inspire, motivate, or simply enjoy your favorite characters' words.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/simi?text=gas">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Simi</h4>
+</div>
+<p class="text-gray-400 text-sm">Chat with simi simi, an interactive AI designed to have fun conversations and entertain with witty responses.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/tinyurl?url=https://files.catbox.moe/c0kg5s.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Tinyurl</h4>
+</div>
+<p class="text-gray-400 text-sm">Create short and customizable links quickly and easily for sharing and tracking purposes.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/bratvideo?text=shiro%20api">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Brat video</h4>
+</div>
+<p class="text-gray-400 text-sm">Transform your text into animated video stickers quickly and easily with an intuitive tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/bratimage?text=shiro%20api">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Brat image</h4>
+</div>
+<p class="text-gray-400 text-sm">Convert your text into fun and expressive stickers with an easy-to-use tool.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/remini?url=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Remini</h4>
+</div>
+<p class="text-gray-400 text-sm">Boost the clarity, sharpness, and detail of your images with advanced quality enhancement tools.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/enhance?url=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Remini v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Improve your image quality with enhanced clarity and detail using remini v2.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/recolor?url=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Recolor</h4>
+</div>
+<p class="text-gray-400 text-sm">Transform and recolor images effortlessly with AI-powered color adjustment tools.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/upscale?url=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Upscale</h4>
+</div>
+<p class="text-gray-400 text-sm">Enhance and upscale images effortlessly with AI-powered technology for higher resolution and better quality.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/tools/upscaler?url=https://i.pinimg.com/736x/39/db/a0/39dba0947c86a7701ace4885e52d0c54.jpg">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Upscale v2</h4>
+</div>
+<p class="text-gray-400 text-sm">Enhance and upscale images effortlessly with AI-powered technology for higher resolution and better quality.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- News Endpoints -->
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-semibold text-blue-400">News Endpoint</h3>
+<span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-bold">13 Endpoint</span>
+</div>
+
+<div class="space-y-4">
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/anime">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Anime</h4>
+</div>
+<p class="text-gray-400 text-sm">Get the latest news, updates, and releases from the world of anime, including upcoming series, episodes, and industry trends.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/kontan">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Kontan</h4>
+</div>
+<p class="text-gray-400 text-sm">Stay updated with the latest business, financial, and economic news from Kontan, offering in-depth coverage and analysis.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/antara">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Antara</h4>
+</div>
+<p class="text-gray-400 text-sm">Get the latest news, reports, and updates from Antara, Indonesia's national news agency, covering politics, economy, and more.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/indozone">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Indozone</h4>
+</div>
+<p class="text-gray-400 text-sm">Stay informed with the latest news, entertainment, and tech updates from Indozone, covering various topics in Indonesia and globally.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/detiknews">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Detik</h4>
+</div>
+<p class="text-gray-400 text-sm">Get the latest news, trending stories, and updates from Detik, covering a wide range of topics from Indonesia and around the world.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/tempo">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Tempo</h4>
+</div>
+<p class="text-gray-400 text-sm">Stay updated with the latest news, analysis, and in-depth stories from Tempo, covering politics, business, and current events in Indonesia and globally.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/republika">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Republika</h4>
+</div>
+<p class="text-gray-400 text-sm">Get the latest news, insights, and updates from Republika, covering topics on politics, economics, and social issues in Indonesia and around the world.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/kumparan">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Kumparan</h4>
+</div>
+<p class="text-gray-400 text-sm">Stay informed with the latest news, stories, and updates from Kumparan, covering a variety of topics from Indonesia and worldwide.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/liputan6">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Liputan6</h4>
+</div>
+<p class="text-gray-400 text-sm">Get the latest news, updates, and in-depth stories from Liputan6, covering a wide range of topics in Indonesia and beyond.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/cnn">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">CNN</h4>
+</div>
+<p class="text-gray-400 text-sm">Stay updated with the latest global news, analysis, and breaking stories from CNN.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/cnbc">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">CNBC</h4>
+</div>
+<p class="text-gray-400 text-sm">Get the latest business, financial, and market news from CNBC, keeping you informed on global economic trends.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/jkt">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Jkt48</h4>
+</div>
+<p class="text-gray-400 text-sm">Stay updated with the latest news, events, and updates from JKT48, Indonesia's popular idol group.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+
+<div class="endpoint-card bg-gray-700 p-5 rounded-lg flex items-start justify-between" data-url="/berita/metronews">
+<div class="flex flex-col space-y-2">
+<div class="flex items-center space-x-3">
+<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold">GET</span>
+<h4 class="text-xl font-bold">Metro</h4>
+</div>
+<p class="text-gray-400 text-sm">Get the latest news and updates from Metro TV, covering a wide range of topics from around the world.</p>
+</div>
+<div class="flex space-x-2">
+<button class="copy-btn bg-gray-600 hover:bg-gray-500 transition duration-200 px-3 py-1 rounded-full text-[12px] font-bold">Copy</button>
+<button class="try-btn bg-blue-600 hover:bg-blue-500 transition duration-200 px-3 py-1 rounded-full text-white text-[12px] font-bold">Try</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- JavaScript untuk tombol Copy dan Try -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+document.querySelectorAll('.copy-btn').forEach(button => {
+button.addEventListener('click', function () {
+const card = this.closest('.endpoint-card');
+if (!card) return;
+
+const endpointUrl = card.getAttribute('data-url');
+const fullUrl = `https://api.shirodixs.my.id${endpointUrl}`;
+
+navigator.clipboard.writeText(fullUrl)
+.then(() => {
+this.innerText = 'Copied!';
+this.classList.add('bg-green-600');
+setTimeout(() => {
+this.innerText = 'Copy';
+this.classList.remove('bg-green-600');
+}, 1500);
+})
+.catch(err => console.error('Copy failed:', err));
+});
+});
+});
+
+document.querySelectorAll('.try-btn').forEach(button => {
+button.addEventListener('click', function () {
+const card = this.closest('.endpoint-card');
+if (!card) return;
+const endpointUrl = card.getAttribute('data-url');
+const testUrl = `${endpointUrl}`;
+window.open(testUrl, '_blank');
+});
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+setTimeout(function() {
+document.getElementById('loader').style.display = 'none';
+}, 2000);
+});
+
+</script>
+<div class="bg-gray-800 rounded-2xl p-6 shadow-xl mt-8">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="flex flex-col items-center space-y-2">
+<p class="text-gray-400 text-sm">© 2025 Shiro. All rights reserved. built with love by developers, for developers.</p>
+</div>
+<div class="social-links">
+<a href="https://github.com/shirodixs" target="_blank" rel="noopener noreferrer">
+<i class="fab fa-github"></i>
+</a>
+ <a href="https://wa.me/6285226344606" target="_blank" rel="noopener noreferrer">
+<i class="fab fa-whatsapp"></i>
+</a>
+</div>
+</div>
+</div>
+</body>
+</html>
